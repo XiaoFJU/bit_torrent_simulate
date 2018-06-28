@@ -210,14 +210,45 @@ function shuffle(a) {
   }
 }
 
+
 // n is peer number
-n = 11;
+let n = config.get('peerNumber');
 
-// d is several neighbors per peer
+// d is number of neighbors per peer
+let d = config.get('neighborsPerPeer');
+
+// let complateTime = simulate(n, d, strategy='randomSelection');
+// console.log('# randomSelection complateTime :', complateTime);
+
+// complateTime = simulate(n, d, strategy='rarestFirst');
+// console.log('# rarestFirst complateTime :', complateTime);
+
+// Q1
+console.log("\n===========Q1===========");
 d = 10;
+[50, 100, 150, 200, 250].forEach(n=>{
+  console.log(`[n=${n} d=${d}] `)
+  
+  let complateTime = simulate(n, d, strategy='randomSelection');
+  console.log('# randomSelection complateTime : ['+ complateTime.reduce((a,b)=>{return `${a}, ${b}`}) + ']');
+  console.log(`avg_time = ${complateTime.reduce((a,b)=>{return a+b})/n}\n`)
 
-let complateTime = simulate(n, d, strategy='randomSelection');
-console.log('# randomSelection complateTime :', complateTime);
+  complateTime = simulate(n, d, strategy='rarestFirst');
+  console.log('# rarestFirst complateTime : ['+ complateTime.reduce((a,b)=>{return `${a}, ${b}`}) + ']');
+  console.log(`avg_time = ${complateTime.reduce((a,b)=>{return a+b})/n}\n`)
+})
 
-complateTime = simulate(n, d, strategy='rarestFirst');
-console.log('# rarestFirst complateTime :', complateTime);
+// Q2
+console.log("\n===========Q2===========");
+n = 50;
+[10, 20, 30, 40, 49].forEach(d=>{
+  console.log(`[n=${n} d=${d}] `)
+  
+  let complateTime = simulate(n, d, strategy='randomSelection');
+  console.log('# randomSelection complateTime : ['+ complateTime.reduce((a,b)=>{return `${a}, ${b}`}) + ']')
+  console.log(`avg_time = ${complateTime.reduce((a,b)=>{return a+b})/n}\n`)
+
+  complateTime = simulate(n, d, strategy='rarestFirst');
+  console.log('# rarestFirst complateTime : ['+ complateTime.reduce((a,b)=>{return `${a}, ${b}`}) + ']');
+  console.log(`avg_time = ${complateTime.reduce((a,b)=>{return a+b})/n}\n`)
+})

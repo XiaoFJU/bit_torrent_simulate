@@ -1,4 +1,7 @@
 { 
+  "peerNumber": 50,
+  "neighborsPerPeer": 10,
+
   "filePieceNumber": 50,
   "pieceSize": 2,
   "downloadSpeed": 2,
