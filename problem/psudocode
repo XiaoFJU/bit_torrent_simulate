@@ -1,0 +1,57 @@
+main () {
+    for ( n = 50; n <= 250; n = n+50) {
+        //建立鄰居關係並記錄，peer 0為seed
+
+        for ( i = 1; i <= n; i++) {
+            將peer i和seed設為鄰居;
+
+            if (peer i的鄰居個數 bi少於d)
+                再隨機挑選(d – bi)個peer當鄰居;
+        }
+        simulate (rarest first);
+        simulate (random selection);
+    }
+}
+
+
+simulate (strategy) {	
+
+    初始化 buffer map, request queue等
+	int currTime = -1;
+
+	while (not all peers finished) {
+		currTime++;
+
+		// 處理此時會服務完之request
+		for ( i = 0; i <= n; i++) {
+			if ( peer i 在此時會完成上傳某個片段給 peer j ) {
+				peer j 更新buffer map，若此時檔案全部下載完成，則記錄下載完成時間;
+				peer i 刪除該項來自peer j的request (因已完成);
+			}
+		}
+
+		// 鄰居交換 buffer map
+		for ( i = 1; i <= n; i++) {
+            peer i收集其鄰居的buffer map;
+        }
+
+        // 選擇下一個片段，發出下載request
+        for ( i = 1; i <= n; i++) {
+            if (peer i 沒有未完成的request在外) 
+                根據strategy 挑選下一個要下載的片段
+                並對擁有該片段的peer中隨機挑選一個發出request，若鄰居peer皆沒有該片段，則對seed發出request;
+        }
+
+        // 從queue中選擇下一個要服務的request
+        for ( i = 0; i <= n; i++) {
+            if ( peer i 在此時並沒有在服務任何request ) {
+                peer i 挑選queue裡面下一個request來服務，並記錄預計完成時間
+            }
+        }
+
+    }
+    
+    return 平均下載完成時間;
+}
+                                                                                                                                
+
